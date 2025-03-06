@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://Robot.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 60, 52 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 61, 53 )
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite2D" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, 12 )
+shape = SubResource( 1 )
+
+[node name="PlayerHurtbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtbox"]
+visible = false
+position = Vector2( 0, 12 )
+shape = SubResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="ShootPointRight" type="Position2D" parent="."]
+position = Vector2( 62, -7 )
+
+[node name="ShootPointLeft" type="Position2D" parent="."]
+position = Vector2( -62, -7 )
+
+[node name="Container" type="Node" parent="."]
+[connection signal="body_entered" from="PlayerHurtbox" to="." method="_on_PlayerHurtbox_body_entered"]
+[connection signal="body_exited" from="PlayerHurtbox" to="." method="_on_PlayerHurtbox_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

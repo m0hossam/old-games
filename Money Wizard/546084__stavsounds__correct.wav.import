@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/546084__stavsounds__correct.wav-58ee83a5d56a57ce3b1d57cad3dc6603.sample"
+
+[deps]
+
+source_file="res://546084__stavsounds__correct.wav"
+dest_files=[ "res://.import/546084__stavsounds__correct.wav-58ee83a5d56a57ce3b1d57cad3dc6603.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

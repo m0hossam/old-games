@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Health.png" type="Texture" id=1]
+[ext_resource path="res://HealthEmpty.png" type="Texture" id=2]
+
+[node name="GUI" type="CanvasLayer"]
+
+[node name="HealthBar" type="TextureProgress" parent="."]
+margin_left = 600.0
+margin_top = 20.0
+margin_right = 856.0
+margin_bottom = 52.0
+value = 100.0
+texture_under = ExtResource( 2 )
+texture_progress = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
