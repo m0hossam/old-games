@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Images/Rock.png" type="Texture" id=1]
+
+[node name="TilesetFactory" type="Node2D"]
+
+[node name="Rock" type="Sprite" parent="."]
+position = Vector2( 166.923, 129.248 )
+texture = ExtResource( 1 )

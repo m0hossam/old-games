@@ -1,0 +1,180 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Ball.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Ball2.gd" type="Script" id=3]
+[ext_resource path="res://Center.png" type="Texture" id=4]
+[ext_resource path="res://World.gd" type="Script" id=5]
+[ext_resource path="res://GUI.gd" type="Script" id=6]
+[ext_resource path="res://EasyBot.tscn" type="PackedScene" id=7]
+[ext_resource path="res://HardBot.gd" type="Script" id=8]
+[ext_resource path="res://WallSound.ogg" type="AudioStream" id=9]
+[ext_resource path="res://PaddleSound.ogg" type="AudioStream" id=10]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 511, 10 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 256 )
+
+[node name="WorldHardBot" type="Node"]
+script = ExtResource( 5 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1025, 256 )
+
+[node name="HardBot" parent="." instance=ExtResource( 7 )]
+position = Vector2( 104, 256 )
+script = ExtResource( 8 )
+
+[node name="Center" type="Node2D" parent="."]
+position = Vector2( 313, 130 )
+
+[node name="Sprite" type="Sprite" parent="Center"]
+position = Vector2( 199, 126 )
+texture = ExtResource( 4 )
+
+[node name="Ball2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 520, 245 )
+script = ExtResource( 3 )
+
+[node name="Up" type="StaticBody2D" parent="."]
+visible = false
+position = Vector2( 512, -10 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Up"]
+shape = SubResource( 1 )
+
+[node name="Down" type="StaticBody2D" parent="."]
+visible = false
+position = Vector2( 512, 522 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Down"]
+shape = SubResource( 1 )
+
+[node name="Left" type="Area2D" parent="."]
+visible = false
+position = Vector2( -10, 256 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left"]
+shape = SubResource( 2 )
+
+[node name="Right" type="Area2D" parent="."]
+visible = false
+position = Vector2( 1034, 256 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right"]
+shape = SubResource( 2 )
+
+[node name="Score" type="Label" parent="."]
+anchor_left = 0.534
+anchor_top = -0.072
+anchor_right = 0.534
+anchor_bottom = -0.072
+margin_left = -42.8159
+margin_top = 52.864
+margin_right = -2.81592
+margin_bottom = 82.864
+rect_scale = Vector2( 3, 3 )
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Score2" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = -0.062
+anchor_right = 0.5
+anchor_bottom = -0.062
+margin_left = -112.0
+margin_top = 47.744
+margin_right = -72.0
+margin_bottom = 77.744
+rect_scale = Vector2( 3, 3 )
+text = "0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GUI" type="Control" parent="."]
+pause_mode = 2
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Shade" type="ColorRect" parent="GUI"]
+margin_left = -139.0
+margin_top = -78.0
+margin_right = 1129.0
+margin_bottom = 626.0
+color = Color( 0, 0, 0, 0.352941 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="GUI"]
+margin_left = 381.0
+margin_top = 148.0
+margin_right = 637.0
+margin_bottom = 404.0
+color = Color( 0, 0, 0.113725, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Restart" type="Button" parent="GUI"]
+margin_left = 450.0
+margin_top = 200.0
+margin_right = 575.0
+margin_bottom = 270.0
+text = "Restart Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="Button" parent="GUI"]
+margin_left = 450.0
+margin_top = 291.0
+margin_right = 575.0
+margin_bottom = 361.0
+text = "Main Menu"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="GUI"]
+wait_time = 0.5
+one_shot = true
+
+[node name="PaddleHit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+
+[node name="WallHit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+[connection signal="ball_out_of_bounds" from="." to="Ball2" method="_on_World_ball_out_of_bounds"]
+[connection signal="pause_game" from="." to="GUI" method="_on_World_pause_game"]
+[connection signal="body_entered" from="Left" to="." method="_on_Left_body_entered"]
+[connection signal="body_entered" from="Right" to="." method="_on_Right_body_entered"]
+[connection signal="pressed" from="GUI/Restart" to="GUI" method="_on_Restart_pressed"]
+[connection signal="pressed" from="GUI/Menu" to="GUI" method="_on_Menu_pressed"]
+[connection signal="timeout" from="GUI/Timer" to="GUI" method="_on_Timer_timeout"]
