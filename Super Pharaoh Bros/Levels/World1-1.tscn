@@ -1,0 +1,109 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/World1-1.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/SpikesEnemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/FastEnemy.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/FlyingEnemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/PowerUpBlock.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/GUI.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/RegularEnemy.tscn" type="PackedScene" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 498, 75 )
+
+[node name="World1-1" type="Node"]
+script = ExtResource( 2 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 318, 486 )
+collision_mask = 0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D"]
+margin_left = -302.0
+margin_right = 694.0
+margin_bottom = 150.0
+color = Color( 0.0235294, 0.254902, 0.0235294, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+visible = false
+position = Vector2( 196, 75 )
+shape = SubResource( 1 )
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2( -533, 339 )
+collision_mask = 0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D3"]
+margin_left = -302.0
+margin_right = 694.0
+margin_bottom = 150.0
+color = Color( 0.0235294, 0.254902, 0.0235294, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+visible = false
+position = Vector2( 196, 75 )
+shape = SubResource( 1 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2( 1195, 363 )
+collision_mask = 0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D2"]
+margin_left = -302.0
+margin_right = 694.0
+margin_bottom = 150.0
+color = Color( 0.0235294, 0.254902, 0.0235294, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+visible = false
+position = Vector2( 196, 75 )
+shape = SubResource( 1 )
+
+[node name="Player" parent="." groups=[
+"Players",
+] instance=ExtResource( 1 )]
+position = Vector2( 86, 297 )
+
+[node name="PowerUpBlock" parent="." instance=ExtResource( 6 )]
+position = Vector2( 38, 226 )
+
+[node name="PowerUpBlock2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 78, 226 )
+
+[node name="PowerUpBlock3" parent="." instance=ExtResource( 6 )]
+position = Vector2( 118, 226 )
+
+[node name="SpikesEnemy" parent="." instance=ExtResource( 3 )]
+position = Vector2( 551, 413 )
+
+[node name="FlyingEnemy" parent="." instance=ExtResource( 5 )]
+position = Vector2( 739, 363 )
+
+[node name="FastEnemy" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1176, 325 )
+
+[node name="RegularEnemy" parent="." instance=ExtResource( 8 )]
+position = Vector2( 1051, 334 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" parent="CanvasLayer" instance=ExtResource( 7 )]

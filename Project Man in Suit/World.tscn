@@ -1,0 +1,103 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://World/GrassBackground.png" type="Texture" id=2]
+[ext_resource path="res://World/Tombstone.tscn" type="PackedScene" id=3]
+[ext_resource path="res://World/AutumnLeaves.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Enemies/Bat.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Camera2D.tscn" type="PackedScene" id=6]
+
+[node name="World" type="Node2D"]
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 160, 90 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( -339, -99, 701, 367 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Camera2D" parent="." instance=ExtResource( 6 )]
+position = Vector2( 161.53, 89.6494 )
+
+[node name="TopLeft" parent="Camera2D/Limits" index="0"]
+position = Vector2( -187.312, -89.5857 )
+
+[node name="BottomRight" parent="Camera2D/Limits" index="1"]
+position = Vector2( 507.871, 271.38 )
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Player" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 161.53, 89.6494 )
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
+remote_path = NodePath("../../../Camera2D")
+
+[node name="Tombstones" type="YSort" parent="YSort"]
+
+[node name="Tombstone3" parent="YSort/Tombstones" instance=ExtResource( 3 )]
+position = Vector2( 89.131, 158.206 )
+
+[node name="Tombstone" parent="YSort/Tombstones" instance=ExtResource( 3 )]
+position = Vector2( 91.3646, 113.499 )
+
+[node name="Tombstone2" parent="YSort/Tombstones" instance=ExtResource( 3 )]
+position = Vector2( 200.764, 137.981 )
+
+[node name="Tombstone4" parent="YSort/Tombstones" instance=ExtResource( 3 )]
+position = Vector2( 162.365, 117.363 )
+
+[node name="Tombstone5" parent="YSort/Tombstones" instance=ExtResource( 3 )]
+position = Vector2( 162.919, 161.836 )
+
+[node name="Tombstone6" parent="YSort/Tombstones" instance=ExtResource( 3 )]
+position = Vector2( 125.556, 89.4991 )
+
+[node name="Tombstone7" parent="YSort/Tombstones" instance=ExtResource( 3 )]
+position = Vector2( 127.001, 142.309 )
+
+[node name="Tombstone8" parent="YSort/Tombstones" instance=ExtResource( 3 )]
+position = Vector2( 57.9746, 137.462 )
+
+[node name="AutumnLeaves" type="YSort" parent="YSort"]
+
+[node name="AutumnLeaves" parent="YSort/AutumnLeaves" instance=ExtResource( 4 )]
+position = Vector2( 125.408, 37.1704 )
+
+[node name="AutumnLeaves2" parent="YSort/AutumnLeaves" instance=ExtResource( 4 )]
+position = Vector2( 16.8622, 98.9942 )
+
+[node name="AutumnLeaves3" parent="YSort/AutumnLeaves" instance=ExtResource( 4 )]
+position = Vector2( 45.2184, 169.746 )
+
+[node name="AutumnLeaves4" parent="YSort/AutumnLeaves" instance=ExtResource( 4 )]
+position = Vector2( 252.359, 129.67 )
+
+[node name="AutumnLeaves5" parent="YSort/AutumnLeaves" instance=ExtResource( 4 )]
+position = Vector2( 200.446, 60.2954 )
+
+[node name="AutumnLeaves6" parent="YSort/AutumnLeaves" instance=ExtResource( 4 )]
+position = Vector2( 26.8454, 30.4824 )
+
+[node name="AutumnLeaves7" parent="YSort/AutumnLeaves" instance=ExtResource( 4 )]
+position = Vector2( 70.5614, 79.8714 )
+
+[node name="AutumnLeaves8" parent="YSort/AutumnLeaves" instance=ExtResource( 4 )]
+position = Vector2( 118.949, 160.296 )
+
+[node name="AutumnLeaves9" parent="YSort/AutumnLeaves" instance=ExtResource( 4 )]
+position = Vector2( 216.726, 156.625 )
+
+[node name="AutumnLeaves10" parent="YSort/AutumnLeaves" instance=ExtResource( 4 )]
+position = Vector2( 130.963, 113.576 )
+
+[node name="AutumnLeaves11" parent="YSort/AutumnLeaves" instance=ExtResource( 4 )]
+position = Vector2( 246.76, 59.5151 )
+
+[node name="Bat" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 296.281, 42.8834 )
+collision_mask = 0
+
+[editable path="Camera2D"]
