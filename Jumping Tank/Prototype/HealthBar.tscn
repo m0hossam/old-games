@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://progress_bar.tres" type="Theme" id=1]
+
+[node name="ProgressBar" type="ProgressBar"]
+margin_left = -40.0
+margin_top = 20.0
+margin_bottom = 34.0
+rect_rotation = 270.0
+theme = ExtResource( 1 )
+step = 10.0
+value = 100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

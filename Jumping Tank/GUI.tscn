@@ -1,0 +1,22 @@
+[gd_scene format=2]
+
+[node name="GUI" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 492.0
+margin_top = 1.0
+margin_right = 692.0
+margin_bottom = 15.0
+rect_scale = Vector2( 2, 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Ground Will Turn To Lava In:"
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Prototype/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Prototype/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Prototype/AirEnemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Prototype/Rock.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Prototype/World.gd" type="Script" id=5]
+[ext_resource path="res://WorldTemp.tscn" type="PackedScene" id=6]
+
+[node name="World" type="Node"]
+script = ExtResource( 5 )
+
+[node name="WorldTemp" parent="." instance=ExtResource( 6 )]
+
+[node name="LavaTimer" type="Timer" parent="."]
+wait_time = 16.0
+one_shot = true
+autostart = true
+
+[node name="LavaCooldown" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="Enemy" parent="." instance=ExtResource( 1 )]
+position = Vector2( 217, 146 )
+
+[node name="AirEnemy" parent="." instance=ExtResource( 3 )]
+position = Vector2( 777, 613 )
+
+[node name="AirEnemy2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 481, 85 )
+
+[node name="AirEnemy3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1184, 269 )
+
+[node name="Rock" parent="." instance=ExtResource( 4 )]
+position = Vector2( 488, 314 )
+
+[node name="Rock2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 596, 530 )
+
+[node name="Rock3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 912, 280 )
+
+[node name="Rock4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1005, 532 )
+
+[node name="Rock5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 744, 166 )
+
+[node name="Rock6" parent="." instance=ExtResource( 4 )]
+position = Vector2( 189, 324 )
+
+[node name="Rock7" parent="." instance=ExtResource( 4 )]
+position = Vector2( 282, 258 )
+
+[node name="Rock8" parent="." instance=ExtResource( 4 )]
+position = Vector2( 376, 154 )
+
+[node name="Enemy2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1212, 136 )
+
+[node name="Enemy3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 157, 600 )
+
+[node name="Enemy4" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1193, 549 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 693, 311 )
+collision_layer = 2147483649
+[connection signal="timeout" from="LavaTimer" to="." method="_on_LavaTimer_timeout"]
+[connection signal="timeout" from="LavaCooldown" to="." method="_on_LavaCooldown_timeout"]
+
+[editable path="WorldTemp"]

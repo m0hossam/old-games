@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Prototype/HealthPowerup.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[node name="HealthPowerup" type="Area2D"]
+position = Vector2( -114, 127 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 8.0
+margin_bottom = 8.0
+color = Color( 0.227451, 0.698039, 0.113725, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 1 )
+[connection signal="body_entered" from="." to="." method="_on_HealthPowerup_body_entered"]

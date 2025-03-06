@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Prototype/AirEnemy.gd" type="Script" id=1]
+[ext_resource path="res://Prototype/HealthBar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Prototype/WanderStart.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Prototype/WanderTimer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Prototype/WanderDuration.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Prototype/TankShot.tscn" type="PackedScene" id=6]
+[ext_resource path="res://FrogTankAirِ.png" type="Texture" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 20, 20 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 150.0
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 300.0
+
+[node name="AirEnemy" type="KinematicBody2D" groups=[
+"Enemies",
+]]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -1, -10 )
+texture = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Aimer" type="Position2D" parent="."]
+position = Vector2( 0, -40 )
+
+[node name="PlayerZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerZone"]
+visible = false
+shape = SubResource( 2 )
+
+[node name="AirZone" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AirZone"]
+visible = false
+shape = SubResource( 3 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="AirTimer" type="Timer" parent="."]
+
+[node name="ProgressBar" parent="." instance=ExtResource( 2 )]
+
+[node name="WanderTimer" parent="." instance=ExtResource( 4 )]
+
+[node name="WanderDuration" parent="." instance=ExtResource( 5 )]
+
+[node name="WanderStart" parent="." instance=ExtResource( 3 )]
+
+[node name="TankShot" parent="." instance=ExtResource( 6 )]
+[connection signal="body_entered" from="PlayerZone" to="." method="_on_PlayerZone_body_entered"]
+[connection signal="body_exited" from="PlayerZone" to="." method="_on_PlayerZone_body_exited"]
+[connection signal="body_entered" from="AirZone" to="." method="_on_AirZone_body_entered"]
+[connection signal="body_exited" from="AirZone" to="." method="_on_AirZone_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="AirTimer" to="." method="_on_AirTimer_timeout"]
+[connection signal="timeout" from="WanderTimer" to="." method="_on_WanderTimer_timeout"]
+[connection signal="timeout" from="WanderDuration" to="." method="_on_WanderDuration_timeout"]
+[connection signal="timeout" from="WanderStart" to="." method="_on_WanderStart_timeout"]

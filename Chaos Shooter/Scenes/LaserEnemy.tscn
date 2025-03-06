@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Art/progress_bar.tres" type="Theme" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/LaserEnemy.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 30, 30 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 234.0
+
+[node name="LaserEnemy" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+rotation = 1.5708
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Zone" type="Area2D" parent="."]
+collision_layer = 2147483648
+collision_mask = 2147483650
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Zone"]
+visible = false
+shape = SubResource( 2 )
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 40, 0 )
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+margin_left = -32.0
+margin_top = -50.0
+margin_right = 32.0
+margin_bottom = -36.0
+theme = ExtResource( 1 )
+value = 100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PoolVector2Array( 40, 0 )
+default_color = Color( 0.937255, 0.0901961, 0.0901961, 1 )
+end_cap_mode = 2
+[connection signal="body_entered" from="Zone" to="." method="_on_Zone_body_entered"]
+[connection signal="body_exited" from="Zone" to="." method="_on_Zone_body_exited"]

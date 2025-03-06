@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Prototype/Player.gd" type="Script" id=1]
+[ext_resource path="res://Prototype/HealthBar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Prototype/TankShot.tscn" type="PackedScene" id=3]
+[ext_resource path="res://FrogTankJump.png" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 20, 20 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 20, 20 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "Jump"
+length = 2.7
+step = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+}
+
+[node name="Player" type="KinematicBody2D" groups=[
+"Players",
+]]
+position = Vector2( 441.832, 284.321 )
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -1, -8 )
+texture = ExtResource( 4 )
+vframes = 11
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 0, -40 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.7
+one_shot = true
+
+[node name="ShootCooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="EnemyFlyDetection" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyFlyDetection"]
+visible = false
+shape = SubResource( 2 )
+
+[node name="Bullets" type="Label" parent="."]
+margin_left = 21.168
+margin_top = -13.321
+margin_right = 42.168
+margin_bottom = 3.67899
+rect_scale = Vector2( 2, 2 )
+text = "25"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" parent="." instance=ExtResource( 2 )]
+
+[node name="TankShot" parent="." instance=ExtResource( 3 )]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Jump = SubResource( 3 )
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="ShootCooldown" to="." method="_on_ShootCooldown_timeout"]
+[connection signal="body_entered" from="EnemyFlyDetection" to="." method="_on_EnemyFlyDetection_body_entered"]
+[connection signal="body_exited" from="EnemyFlyDetection" to="." method="_on_EnemyFlyDetection_body_exited"]
