@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://botbbpov1p4gm"]
+
+[ext_resource type="Script" path="res://Scripts/BearTrap.gd" id="1_jsuym"]
+[ext_resource type="Texture2D" uid="uid://cv6cluxjkldwi" path="res://Images/Bear Trap.png" id="2_0yvcl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a1571"]
+atlas = ExtResource("2_0yvcl")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wk5sa"]
+atlas = ExtResource("2_0yvcl")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_01p52"]
+atlas = ExtResource("2_0yvcl")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5hymx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a1571")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wk5sa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_01p52")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i5mpb"]
+radius = 25.0
+
+[node name="BearTrap" type="Area2D"]
+texture_filter = 1
+position = Vector2(165, 175)
+script = ExtResource("1_jsuym")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5hymx")
+
+[node name="TrapTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="TrapStart" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="TrapCooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_i5mpb")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="TrapTimer" to="." method="_on_trap_timer_timeout"]
+[connection signal="timeout" from="TrapStart" to="." method="_on_trap_start_timeout"]
+[connection signal="timeout" from="TrapCooldown" to="." method="_on_trap_cooldown_timeout"]

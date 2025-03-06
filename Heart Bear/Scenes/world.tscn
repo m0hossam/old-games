@@ -1,0 +1,751 @@
+[gd_scene load_steps=19 format=3 uid="uid://bekxqen7f61qw"]
+
+[ext_resource type="Script" path="res://Scripts/World.gd" id="1_yjcc0"]
+[ext_resource type="Texture2D" uid="uid://cof81loup77vp" path="res://Images/512x256 Summer Jungle.png" id="2_q8wdu"]
+[ext_resource type="Script" path="res://Scripts/TravelButton.gd" id="3_encbi"]
+[ext_resource type="Texture2D" uid="uid://clskxvnoprh62" path="res://Images/512x256 Fall Jungle.png" id="4_2qoq2"]
+[ext_resource type="Texture2D" uid="uid://bcmyj425idyxx" path="res://Images/512x256 Winter Jungle.png" id="4_dq3ld"]
+[ext_resource type="PackedScene" uid="uid://c8dkn4j5jncne" path="res://Scenes/player.tscn" id="4_xicbk"]
+[ext_resource type="Script" path="res://Scripts/MeteorSpawn.gd" id="5_q5x2p"]
+[ext_resource type="Texture2D" uid="uid://bth64sreirs8r" path="res://Images/512x256 Spring Jungle.png" id="6_617rg"]
+[ext_resource type="Texture2D" uid="uid://c1cs4twa54dtj" path="res://Images/64x64 Heart.png" id="6_scuv4"]
+[ext_resource type="PackedScene" uid="uid://botbbpov1p4gm" path="res://Scenes/bear_trap.tscn" id="6_ufyqc"]
+[ext_resource type="Script" path="res://Scripts/Score.gd" id="7_2mo64"]
+[ext_resource type="Texture2D" uid="uid://dmqdakodn40da" path="res://Images/64x64 Bear.png" id="8_uculr"]
+[ext_resource type="Script" path="res://Scripts/HiScore.gd" id="9_hn1f5"]
+[ext_resource type="Script" path="res://Scripts/MeteorDeletionZone.gd" id="11_57q6t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cwfhj"]
+size = Vector2(10, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4e0yp"]
+size = Vector2(532, 10)
+
+[sub_resource type="LabelSettings" id="LabelSettings_orhvk"]
+font_size = 40
+font_color = Color(1, 0, 0, 1)
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2itcj"]
+font_size = 40
+font_color = Color(0.831373, 0.686275, 0.215686, 1)
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="World" type="Node2D" groups=["World"]]
+script = ExtResource("1_yjcc0")
+metadata/_edit_lock_ = true
+
+[node name="SummerWorld" type="Node2D" parent="."]
+position = Vector2(-46, -4)
+metadata/_edit_group_ = true
+
+[node name="Background" type="Sprite2D" parent="SummerWorld"]
+texture_filter = 1
+position = Vector2(341, 155)
+texture = ExtResource("2_q8wdu")
+
+[node name="Platforms" type="Node2D" parent="SummerWorld"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SummerWorld/Platforms"]
+position = Vector2(75, 27)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="SummerWorld/Platforms/StaticBody2D"]
+offset_right = 10.0
+offset_bottom = 256.0
+color = Color(0, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SummerWorld/Platforms/StaticBody2D"]
+visible = false
+position = Vector2(5, 128)
+shape = SubResource("RectangleShape2D_cwfhj")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="SummerWorld/Platforms"]
+position = Vector2(597, 27)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="SummerWorld/Platforms/StaticBody2D2"]
+offset_right = 10.0
+offset_bottom = 256.0
+color = Color(0, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SummerWorld/Platforms/StaticBody2D2"]
+visible = false
+position = Vector2(5, 128)
+shape = SubResource("RectangleShape2D_cwfhj")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="SummerWorld/Platforms"]
+position = Vector2(75, 17)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="SummerWorld/Platforms/StaticBody2D3"]
+offset_right = 532.0
+offset_bottom = 10.0
+color = Color(0, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SummerWorld/Platforms/StaticBody2D3"]
+visible = false
+position = Vector2(266, 5)
+shape = SubResource("RectangleShape2D_4e0yp")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="SummerWorld/Platforms"]
+position = Vector2(75, 283)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="SummerWorld/Platforms/StaticBody2D4"]
+offset_right = 532.0
+offset_bottom = 10.0
+color = Color(0, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SummerWorld/Platforms/StaticBody2D4"]
+visible = false
+position = Vector2(266, 5)
+shape = SubResource("RectangleShape2D_4e0yp")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="SummerWorld/Platforms"]
+position = Vector2(97, 158)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SummerWorld/Platforms/StaticBody2D5"]
+polygon = PackedVector2Array(42, -14, -12, -4, -12, 4, 39, -8)
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="SummerWorld/Platforms"]
+position = Vector2(194, 93)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SummerWorld/Platforms/StaticBody2D6"]
+polygon = PackedVector2Array(-29, -6, 31, -6, 31, -2, -29, -2)
+
+[node name="StaticBody2D7" type="StaticBody2D" parent="SummerWorld/Platforms"]
+position = Vector2(322, 149)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SummerWorld/Platforms/StaticBody2D7"]
+polygon = PackedVector2Array(-33, -6, 35, -6, 35, -2, -33, -2)
+
+[node name="StaticBody2D8" type="StaticBody2D" parent="SummerWorld/Platforms"]
+position = Vector2(447, 103)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SummerWorld/Platforms/StaticBody2D8"]
+position = Vector2(15, -2)
+polygon = PackedVector2Array(-33, -6, 27, -6, 27, -2, -33, -2)
+
+[node name="StaticBody2D9" type="StaticBody2D" parent="SummerWorld/Platforms"]
+position = Vector2(189, 214)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SummerWorld/Platforms/StaticBody2D9"]
+position = Vector2(13, -9)
+polygon = PackedVector2Array(-33, -6, 51, -6, 51, -2, -33, -2)
+
+[node name="StaticBody2D10" type="StaticBody2D" parent="SummerWorld/Platforms"]
+position = Vector2(122, 247)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SummerWorld/Platforms/StaticBody2D10"]
+polygon = PackedVector2Array(-37, -8, 39, -8, 39, 24, 143, 24, 143, -8, 239, -8, 239, -40, 303, -40, 303, -72, 367, -72, 376, -80, 434, -80, 443, -72, 447, -72, 443, -64, 435, -60, 371, -60, 311, -36, 291, -17, 291, 0, 435, 0, 447, -12, 475, -12, 475, 36, -37, 36)
+
+[node name="HeartSpawns" type="Node2D" parent="SummerWorld" groups=["HeartSpawners"]]
+
+[node name="Marker2D" type="Marker2D" parent="SummerWorld/HeartSpawns"]
+position = Vector2(104, 133)
+
+[node name="Marker2D2" type="Marker2D" parent="SummerWorld/HeartSpawns"]
+position = Vector2(198, 74)
+
+[node name="Marker2D3" type="Marker2D" parent="SummerWorld/HeartSpawns"]
+position = Vector2(327, 130)
+
+[node name="Marker2D4" type="Marker2D" parent="SummerWorld/HeartSpawns"]
+position = Vector2(459, 82)
+
+[node name="Marker2D5" type="Marker2D" parent="SummerWorld/HeartSpawns"]
+position = Vector2(210, 185)
+
+[node name="Marker2D6" type="Marker2D" parent="SummerWorld/HeartSpawns"]
+position = Vector2(477, 218)
+
+[node name="BearTraps" type="Node2D" parent="SummerWorld"]
+
+[node name="BearTrap3" parent="SummerWorld/BearTraps" instance=ExtResource("6_ufyqc")]
+position = Vector2(533, 227)
+
+[node name="BearTrap2" parent="SummerWorld/BearTraps" instance=ExtResource("6_ufyqc")]
+position = Vector2(458, 75)
+
+[node name="BearTrap" parent="SummerWorld/BearTraps" instance=ExtResource("6_ufyqc")]
+position = Vector2(209, 179)
+
+[node name="FallWorld" type="Node2D" parent="."]
+position = Vector2(516, -4)
+metadata/_edit_group_ = true
+
+[node name="Background" type="Sprite2D" parent="FallWorld"]
+texture_filter = 1
+position = Vector2(341, 155)
+texture = ExtResource("4_2qoq2")
+
+[node name="Platforms" type="Node2D" parent="FallWorld"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="FallWorld/Platforms"]
+position = Vector2(75, 27)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="FallWorld/Platforms/StaticBody2D"]
+offset_right = 10.0
+offset_bottom = 256.0
+color = Color(0, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallWorld/Platforms/StaticBody2D"]
+visible = false
+position = Vector2(5, 128)
+shape = SubResource("RectangleShape2D_cwfhj")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="FallWorld/Platforms"]
+position = Vector2(597, 27)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="FallWorld/Platforms/StaticBody2D2"]
+offset_right = 10.0
+offset_bottom = 256.0
+color = Color(0, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallWorld/Platforms/StaticBody2D2"]
+visible = false
+position = Vector2(5, 128)
+shape = SubResource("RectangleShape2D_cwfhj")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="FallWorld/Platforms"]
+position = Vector2(75, 17)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="FallWorld/Platforms/StaticBody2D3"]
+offset_right = 532.0
+offset_bottom = 10.0
+color = Color(0, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallWorld/Platforms/StaticBody2D3"]
+visible = false
+position = Vector2(266, 5)
+shape = SubResource("RectangleShape2D_4e0yp")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="FallWorld/Platforms"]
+position = Vector2(75, 283)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="FallWorld/Platforms/StaticBody2D4"]
+offset_right = 532.0
+offset_bottom = 10.0
+color = Color(0, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallWorld/Platforms/StaticBody2D4"]
+visible = false
+position = Vector2(266, 5)
+shape = SubResource("RectangleShape2D_4e0yp")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="FallWorld/Platforms"]
+position = Vector2(97, 158)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FallWorld/Platforms/StaticBody2D5"]
+polygon = PackedVector2Array(42, -14, -12, -4, -12, 4, 39, -8)
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="FallWorld/Platforms"]
+position = Vector2(194, 93)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FallWorld/Platforms/StaticBody2D6"]
+polygon = PackedVector2Array(-29, -6, 31, -6, 31, -2, -29, -2)
+
+[node name="StaticBody2D7" type="StaticBody2D" parent="FallWorld/Platforms"]
+position = Vector2(322, 149)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FallWorld/Platforms/StaticBody2D7"]
+polygon = PackedVector2Array(-33, -6, 35, -6, 35, -2, -33, -2)
+
+[node name="StaticBody2D8" type="StaticBody2D" parent="FallWorld/Platforms"]
+position = Vector2(447, 103)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FallWorld/Platforms/StaticBody2D8"]
+position = Vector2(15, -2)
+polygon = PackedVector2Array(-33, -6, 27, -6, 27, -2, -33, -2)
+
+[node name="StaticBody2D9" type="StaticBody2D" parent="FallWorld/Platforms"]
+position = Vector2(189, 214)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FallWorld/Platforms/StaticBody2D9"]
+position = Vector2(13, -9)
+polygon = PackedVector2Array(-33, -6, 51, -6, 51, -2, -33, -2)
+
+[node name="StaticBody2D10" type="StaticBody2D" parent="FallWorld/Platforms"]
+position = Vector2(122, 247)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FallWorld/Platforms/StaticBody2D10"]
+polygon = PackedVector2Array(-37, -8, 39, -8, 39, 24, 143, 24, 143, -8, 239, -8, 239, -40, 303, -40, 303, -72, 367, -72, 376, -80, 434, -80, 443, -72, 447, -72, 443, -64, 435, -60, 371, -60, 311, -36, 291, -17, 291, 0, 435, 0, 447, -12, 475, -12, 475, 36, -37, 36)
+
+[node name="HeartSpawns" type="Node2D" parent="FallWorld" groups=["HeartSpawners"]]
+
+[node name="Marker2D" type="Marker2D" parent="FallWorld/HeartSpawns"]
+position = Vector2(104, 133)
+
+[node name="Marker2D2" type="Marker2D" parent="FallWorld/HeartSpawns"]
+position = Vector2(198, 74)
+
+[node name="Marker2D3" type="Marker2D" parent="FallWorld/HeartSpawns"]
+position = Vector2(327, 130)
+
+[node name="Marker2D4" type="Marker2D" parent="FallWorld/HeartSpawns"]
+position = Vector2(459, 82)
+
+[node name="Marker2D5" type="Marker2D" parent="FallWorld/HeartSpawns"]
+position = Vector2(210, 185)
+
+[node name="Marker2D6" type="Marker2D" parent="FallWorld/HeartSpawns"]
+position = Vector2(477, 218)
+
+[node name="BearTraps" type="Node2D" parent="FallWorld"]
+
+[node name="BearTrap" parent="FallWorld/BearTraps" instance=ExtResource("6_ufyqc")]
+position = Vector2(195, 67)
+
+[node name="BearTrap2" parent="FallWorld/BearTraps" instance=ExtResource("6_ufyqc")]
+position = Vector2(322, 123)
+
+[node name="BearTrap3" parent="FallWorld/BearTraps" instance=ExtResource("6_ufyqc")]
+position = Vector2(530, 147)
+
+[node name="WinterWorld" type="Node2D" parent="."]
+position = Vector2(-46, 302)
+metadata/_edit_group_ = true
+
+[node name="Background" type="Sprite2D" parent="WinterWorld"]
+texture_filter = 1
+position = Vector2(341, 155)
+texture = ExtResource("4_dq3ld")
+
+[node name="Platforms" type="Node2D" parent="WinterWorld"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WinterWorld/Platforms"]
+position = Vector2(75, 27)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="WinterWorld/Platforms/StaticBody2D"]
+offset_right = 10.0
+offset_bottom = 256.0
+color = Color(0, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WinterWorld/Platforms/StaticBody2D"]
+visible = false
+position = Vector2(5, 128)
+shape = SubResource("RectangleShape2D_cwfhj")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="WinterWorld/Platforms"]
+position = Vector2(597, 27)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="WinterWorld/Platforms/StaticBody2D2"]
+offset_right = 10.0
+offset_bottom = 256.0
+color = Color(0, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WinterWorld/Platforms/StaticBody2D2"]
+visible = false
+position = Vector2(5, 128)
+shape = SubResource("RectangleShape2D_cwfhj")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="WinterWorld/Platforms"]
+position = Vector2(75, 17)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="WinterWorld/Platforms/StaticBody2D3"]
+offset_right = 532.0
+offset_bottom = 10.0
+color = Color(0, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WinterWorld/Platforms/StaticBody2D3"]
+visible = false
+position = Vector2(266, 5)
+shape = SubResource("RectangleShape2D_4e0yp")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="WinterWorld/Platforms"]
+position = Vector2(75, 283)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="WinterWorld/Platforms/StaticBody2D4"]
+offset_right = 532.0
+offset_bottom = 10.0
+color = Color(0, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WinterWorld/Platforms/StaticBody2D4"]
+visible = false
+position = Vector2(266, 5)
+shape = SubResource("RectangleShape2D_4e0yp")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="WinterWorld/Platforms"]
+position = Vector2(97, 158)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WinterWorld/Platforms/StaticBody2D5"]
+polygon = PackedVector2Array(42, -14, -12, -4, -12, 4, 39, -8)
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="WinterWorld/Platforms"]
+position = Vector2(194, 93)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WinterWorld/Platforms/StaticBody2D6"]
+polygon = PackedVector2Array(-29, -6, 31, -6, 31, -2, -29, -2)
+
+[node name="StaticBody2D7" type="StaticBody2D" parent="WinterWorld/Platforms"]
+position = Vector2(322, 149)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WinterWorld/Platforms/StaticBody2D7"]
+polygon = PackedVector2Array(-33, -6, 35, -6, 35, -2, -33, -2)
+
+[node name="StaticBody2D8" type="StaticBody2D" parent="WinterWorld/Platforms"]
+position = Vector2(447, 103)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WinterWorld/Platforms/StaticBody2D8"]
+position = Vector2(15, -2)
+polygon = PackedVector2Array(-33, -6, 27, -6, 27, -2, -33, -2)
+
+[node name="StaticBody2D9" type="StaticBody2D" parent="WinterWorld/Platforms"]
+position = Vector2(189, 214)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WinterWorld/Platforms/StaticBody2D9"]
+position = Vector2(13, -9)
+polygon = PackedVector2Array(-33, -6, 51, -6, 51, -2, -33, -2)
+
+[node name="StaticBody2D10" type="StaticBody2D" parent="WinterWorld/Platforms"]
+position = Vector2(122, 247)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WinterWorld/Platforms/StaticBody2D10"]
+polygon = PackedVector2Array(-37, -8, 39, -8, 39, 24, 143, 24, 143, -8, 239, -8, 239, -40, 303, -40, 303, -72, 367, -72, 376, -80, 434, -80, 443, -72, 447, -72, 443, -64, 435, -60, 371, -60, 311, -36, 291, -17, 291, 0, 435, 0, 447, -12, 475, -12, 475, 36, -37, 36)
+
+[node name="HeartSpawns" type="Node2D" parent="WinterWorld" groups=["HeartSpawners"]]
+
+[node name="Marker2D" type="Marker2D" parent="WinterWorld/HeartSpawns"]
+position = Vector2(104, 133)
+
+[node name="Marker2D2" type="Marker2D" parent="WinterWorld/HeartSpawns"]
+position = Vector2(198, 74)
+
+[node name="Marker2D3" type="Marker2D" parent="WinterWorld/HeartSpawns"]
+position = Vector2(327, 130)
+
+[node name="Marker2D4" type="Marker2D" parent="WinterWorld/HeartSpawns"]
+position = Vector2(459, 82)
+
+[node name="Marker2D5" type="Marker2D" parent="WinterWorld/HeartSpawns"]
+position = Vector2(210, 185)
+
+[node name="Marker2D6" type="Marker2D" parent="WinterWorld/HeartSpawns"]
+position = Vector2(477, 218)
+
+[node name="BearTraps" type="Node2D" parent="WinterWorld"]
+
+[node name="BearTrap" parent="WinterWorld/BearTraps" instance=ExtResource("6_ufyqc")]
+position = Vector2(311, 219)
+
+[node name="BearTrap2" parent="WinterWorld/BearTraps" instance=ExtResource("6_ufyqc")]
+position = Vector2(458, 75)
+
+[node name="BearTrap3" parent="WinterWorld/BearTraps" instance=ExtResource("6_ufyqc")]
+position = Vector2(195, 67)
+
+[node name="SpringWorld" type="Node2D" parent="."]
+position = Vector2(516, 302)
+metadata/_edit_group_ = true
+
+[node name="Background" type="Sprite2D" parent="SpringWorld"]
+texture_filter = 1
+position = Vector2(341, 155)
+texture = ExtResource("6_617rg")
+
+[node name="Platforms" type="Node2D" parent="SpringWorld"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SpringWorld/Platforms"]
+position = Vector2(75, 27)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="SpringWorld/Platforms/StaticBody2D"]
+offset_right = 10.0
+offset_bottom = 256.0
+color = Color(0, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpringWorld/Platforms/StaticBody2D"]
+visible = false
+position = Vector2(5, 128)
+shape = SubResource("RectangleShape2D_cwfhj")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="SpringWorld/Platforms"]
+position = Vector2(597, 27)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="SpringWorld/Platforms/StaticBody2D2"]
+offset_right = 10.0
+offset_bottom = 256.0
+color = Color(0, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpringWorld/Platforms/StaticBody2D2"]
+visible = false
+position = Vector2(5, 128)
+shape = SubResource("RectangleShape2D_cwfhj")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="SpringWorld/Platforms"]
+position = Vector2(75, 17)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="SpringWorld/Platforms/StaticBody2D3"]
+offset_right = 532.0
+offset_bottom = 10.0
+color = Color(0, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpringWorld/Platforms/StaticBody2D3"]
+visible = false
+position = Vector2(266, 5)
+shape = SubResource("RectangleShape2D_4e0yp")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="SpringWorld/Platforms"]
+position = Vector2(75, 283)
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="SpringWorld/Platforms/StaticBody2D4"]
+offset_right = 532.0
+offset_bottom = 10.0
+color = Color(0, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpringWorld/Platforms/StaticBody2D4"]
+visible = false
+position = Vector2(266, 5)
+shape = SubResource("RectangleShape2D_4e0yp")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="SpringWorld/Platforms"]
+position = Vector2(97, 158)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpringWorld/Platforms/StaticBody2D5"]
+polygon = PackedVector2Array(42, -14, -12, -4, -12, 4, 39, -8)
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="SpringWorld/Platforms"]
+position = Vector2(194, 93)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpringWorld/Platforms/StaticBody2D6"]
+polygon = PackedVector2Array(-29, -6, 31, -6, 31, -2, -29, -2)
+
+[node name="StaticBody2D7" type="StaticBody2D" parent="SpringWorld/Platforms"]
+position = Vector2(322, 149)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpringWorld/Platforms/StaticBody2D7"]
+polygon = PackedVector2Array(-33, -6, 35, -6, 35, -2, -33, -2)
+
+[node name="StaticBody2D8" type="StaticBody2D" parent="SpringWorld/Platforms"]
+position = Vector2(447, 103)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpringWorld/Platforms/StaticBody2D8"]
+position = Vector2(15, -2)
+polygon = PackedVector2Array(-33, -6, 27, -6, 27, -2, -33, -2)
+
+[node name="StaticBody2D9" type="StaticBody2D" parent="SpringWorld/Platforms"]
+position = Vector2(189, 214)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpringWorld/Platforms/StaticBody2D9"]
+position = Vector2(13, -9)
+polygon = PackedVector2Array(-33, -6, 51, -6, 51, -2, -33, -2)
+
+[node name="StaticBody2D10" type="StaticBody2D" parent="SpringWorld/Platforms"]
+position = Vector2(122, 247)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpringWorld/Platforms/StaticBody2D10"]
+polygon = PackedVector2Array(-37, -8, 39, -8, 39, 24, 143, 24, 143, -8, 239, -8, 239, -40, 303, -40, 303, -72, 367, -72, 376, -80, 434, -80, 443, -72, 447, -72, 443, -64, 435, -60, 371, -60, 311, -36, 291, -17, 291, 0, 435, 0, 447, -12, 475, -12, 475, 36, -37, 36)
+
+[node name="HeartSpawns" type="Node2D" parent="SpringWorld" groups=["HeartSpawners"]]
+
+[node name="Marker2D" type="Marker2D" parent="SpringWorld/HeartSpawns"]
+position = Vector2(104, 133)
+
+[node name="Marker2D2" type="Marker2D" parent="SpringWorld/HeartSpawns"]
+position = Vector2(198, 74)
+
+[node name="Marker2D3" type="Marker2D" parent="SpringWorld/HeartSpawns"]
+position = Vector2(327, 130)
+
+[node name="Marker2D4" type="Marker2D" parent="SpringWorld/HeartSpawns"]
+position = Vector2(459, 82)
+
+[node name="Marker2D5" type="Marker2D" parent="SpringWorld/HeartSpawns"]
+position = Vector2(210, 185)
+
+[node name="Marker2D6" type="Marker2D" parent="SpringWorld/HeartSpawns"]
+position = Vector2(477, 218)
+
+[node name="BearTraps" type="Node2D" parent="SpringWorld"]
+
+[node name="BearTrap" parent="SpringWorld/BearTraps" instance=ExtResource("6_ufyqc")]
+position = Vector2(324, 123)
+
+[node name="BearTrap2" parent="SpringWorld/BearTraps" instance=ExtResource("6_ufyqc")]
+position = Vector2(459, 75)
+
+[node name="BearTrap3" parent="SpringWorld/BearTraps" instance=ExtResource("6_ufyqc")]
+position = Vector2(124, 220)
+
+[node name="Player" parent="." instance=ExtResource("4_xicbk")]
+position = Vector2(70, 217)
+
+[node name="MeteorSpawn" type="Node2D" parent="."]
+script = ExtResource("5_q5x2p")
+
+[node name="LeftLoc" type="Marker2D" parent="MeteorSpawn"]
+position = Vector2(-100, -100)
+
+[node name="LeftLoc2" type="Marker2D" parent="MeteorSpawn"]
+position = Vector2(0, -100)
+
+[node name="LeftLoc3" type="Marker2D" parent="MeteorSpawn"]
+position = Vector2(100, -100)
+
+[node name="LeftLoc4" type="Marker2D" parent="MeteorSpawn"]
+position = Vector2(200, -100)
+
+[node name="LeftLoc5" type="Marker2D" parent="MeteorSpawn"]
+position = Vector2(300, -100)
+
+[node name="LeftLoc6" type="Marker2D" parent="MeteorSpawn"]
+position = Vector2(400, -100)
+
+[node name="LeftLoc7" type="Marker2D" parent="MeteorSpawn"]
+position = Vector2(500, -100)
+
+[node name="RightLoc" type="Marker2D" parent="MeteorSpawn"]
+position = Vector2(1252, -100)
+
+[node name="RightLoc2" type="Marker2D" parent="MeteorSpawn"]
+position = Vector2(1152, -100)
+
+[node name="RightLoc3" type="Marker2D" parent="MeteorSpawn"]
+position = Vector2(1052, -100)
+
+[node name="RightLoc4" type="Marker2D" parent="MeteorSpawn"]
+position = Vector2(952, -100)
+
+[node name="RightLoc5" type="Marker2D" parent="MeteorSpawn"]
+position = Vector2(852, -100)
+
+[node name="RightLoc6" type="Marker2D" parent="MeteorSpawn"]
+position = Vector2(752, -100)
+
+[node name="RightLoc7" type="Marker2D" parent="MeteorSpawn"]
+position = Vector2(652, -100)
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_lock_ = true
+
+[node name="FallButton" type="Button" parent="GUI" groups=["WorldButtons"]]
+layout_mode = 0
+offset_left = 1012.0
+offset_top = 603.0
+offset_right = 1112.0
+offset_bottom = 653.0
+text = "Fall"
+script = ExtResource("3_encbi")
+
+[node name="SummerButton" type="Button" parent="GUI" groups=["WorldButtons"]]
+layout_mode = 0
+offset_left = 903.0
+offset_top = 603.0
+offset_right = 1003.0
+offset_bottom = 653.0
+text = "Summer"
+script = ExtResource("3_encbi")
+
+[node name="WinterButton" type="Button" parent="GUI" groups=["WorldButtons"]]
+layout_mode = 0
+offset_left = 903.0
+offset_top = 662.0
+offset_right = 1003.0
+offset_bottom = 712.0
+text = "Winter"
+script = ExtResource("3_encbi")
+
+[node name="SpringButton" type="Button" parent="GUI" groups=["WorldButtons"]]
+layout_mode = 0
+offset_left = 1012.0
+offset_top = 662.0
+offset_right = 1112.0
+offset_bottom = 712.0
+text = "Spring"
+script = ExtResource("3_encbi")
+
+[node name="HeartIcon" type="TextureRect" parent="GUI"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 4.638
+anchor_bottom = 4.935
+offset_left = 570.0
+offset_top = 599.0
+offset_right = 448.48
+offset_bottom = 465.6
+texture = ExtResource("6_scuv4")
+
+[node name="BearIcon1" type="Sprite2D" parent="GUI" groups=["BearLives"]]
+texture_filter = 1
+position = Vector2(226, 657)
+texture = ExtResource("8_uculr")
+hframes = 2
+
+[node name="BearIcon2" type="Sprite2D" parent="GUI" groups=["BearLives"]]
+texture_filter = 1
+position = Vector2(162, 657)
+texture = ExtResource("8_uculr")
+hframes = 2
+
+[node name="BearIcon3" type="Sprite2D" parent="GUI" groups=["BearLives"]]
+texture_filter = 1
+position = Vector2(98, 657)
+texture = ExtResource("8_uculr")
+hframes = 2
+
+[node name="Score" type="Label" parent="GUI" groups=["Score"]]
+layout_mode = 0
+offset_left = 481.0
+offset_top = 601.0
+offset_right = 572.0
+offset_bottom = 659.0
+text = "0x"
+label_settings = SubResource("LabelSettings_orhvk")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("7_2mo64")
+
+[node name="HiScore" type="Label" parent="GUI" groups=["Score"]]
+layout_mode = 0
+offset_left = 442.0
+offset_top = 653.0
+offset_right = 690.0
+offset_bottom = 711.0
+text = "High Score: 0"
+label_settings = SubResource("LabelSettings_2itcj")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("9_hn1f5")
+
+[node name="HeartSpawnTimer" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="MeteorShowerTimer" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="MeteorDeletionZone" type="Area2D" parent="."]
+collision_mask = 3
+script = ExtResource("11_57q6t")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="MeteorDeletionZone"]
+polygon = PackedVector2Array(-258, -121, -258, 883, 1536, 883, 1536, -141, 1426, -141, 1426, 793, -176, 793, -176, -121)
+
+[connection signal="pressed" from="GUI/FallButton" to="Player" method="_on_fall_button_pressed"]
+[connection signal="pressed" from="GUI/SummerButton" to="Player" method="_on_summer_button_pressed"]
+[connection signal="pressed" from="GUI/WinterButton" to="Player" method="_on_winter_button_pressed"]
+[connection signal="pressed" from="GUI/SpringButton" to="Player" method="_on_spring_button_pressed"]
+[connection signal="timeout" from="HeartSpawnTimer" to="." method="_on_heart_spawn_timer_timeout"]
+[connection signal="timeout" from="MeteorShowerTimer" to="MeteorSpawn" method="_on_meteor_shower_timer_timeout"]
+[connection signal="body_entered" from="MeteorDeletionZone" to="MeteorDeletionZone" method="_on_body_entered"]
